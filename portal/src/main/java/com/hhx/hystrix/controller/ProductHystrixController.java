@@ -6,7 +6,7 @@ import com.hhx.hystrix.dto.ProductDto;
 import com.hhx.hystrix.service.ProductHystrixService;
 import com.hhx.hystrix.service.ProductService;
 import com.hhx.hystrix.service.command.BaseGetByIdCommand;
-import com.hhx.hystrix.service.command.GroupKeyGetByIdCommand;
+import com.hhx.hystrix.service.command.GetByIdCommand1;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +39,7 @@ public class ProductHystrixController {
     @GetMapping("/hystrix/product/{id}/{asyncId}")
     public List<ProductDto> getById(@PathVariable("id") Integer id, @PathVariable("asyncId") Integer asyncId) throws ExecutionException, InterruptedException, JsonProcessingException {
         log.info("productHystrixService.getByIdAsync: {} ------ start", asyncId);
-        Future<ProductDto> resultFuture = productHystrixService.getByIdAsync(GroupKeyGetByIdCommand.class, asyncId);
+        Future<ProductDto> resultFuture = productHystrixService.getByIdAsync(GetByIdCommand1.class, asyncId);
         log.info("productService.getById: {} ------ start", id);
         ProductDto result = productService.getById(id);
         ProductDto resultAsync;
