@@ -20,10 +20,12 @@ public class ProductHystrixService {
     private ProductService productService;
 
     public ProductDto getById(Class<? extends BaseGetByIdCommand> clazz, Integer id) {
+        log.info("ProductHystrixService.getById clazz: {}, id: {}", clazz.getSimpleName(), id);
         return getCommandInstance(clazz, id).execute();
     }
 
     public Future<ProductDto> getByIdAsync(Class<? extends BaseGetByIdCommand> clazz, Integer id) {
+        log.info("ProductHystrixService.getByIdAsync clazz: {}, id: {}", clazz.getSimpleName(), id);
         return getCommandInstance(clazz, id).queue();
     }
 
@@ -39,7 +41,7 @@ public class ProductHystrixService {
 
     @com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand(
             fallbackMethod = "onDeleteByIdError",
-            groupKey = "product.getById")
+            groupKey = "product.deleteById")
     public Boolean deleteById(Integer id) {
         return productService.deleteById(id);
     }

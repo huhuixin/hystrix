@@ -17,5 +17,10 @@
             <artifactId>common</artifactId>
             <version>${project.verison}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8</version>
+        </dependency>
     </dependencies>
 </project>

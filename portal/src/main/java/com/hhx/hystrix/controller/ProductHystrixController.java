@@ -9,6 +9,7 @@ import com.hhx.hystrix.service.command.BaseGetByIdCommand;
 import com.hhx.hystrix.service.command.GetByIdCommand1;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +37,9 @@ public class ProductHystrixController {
     @Autowired
     private ObjectMapper objectMapper;
 
+    /**
+     * localhost:8080/hystrix/product/300/400
+     */
     @GetMapping("/hystrix/product/{id}/{asyncId}")
     public List<ProductDto> getById(@PathVariable("id") Integer id, @PathVariable("asyncId") Integer asyncId) throws ExecutionException, InterruptedException, JsonProcessingException {
         log.info("productHystrixService.getByIdAsync: {} ------ start", asyncId);
@@ -49,6 +53,9 @@ public class ProductHystrixController {
     }
 
 
+    /**
+     * localhost:8080/hystrix/product/300,400,500,600,700,800,900
+     */
     @GetMapping("/hystrix/product/{ids}")
     public List<ProductDto> getByIds(@PathVariable("ids") String ids) {
         try {
@@ -68,5 +75,14 @@ public class ProductHystrixController {
         } finally {
             log.info("productHystrixService.getByIds: {} ------ end", ids);
         }
+    }
+
+    /**
+     *
+     */
+    @DeleteMapping("/hystrix/product/{id}")
+    public String deleteById(@PathVariable("id") Integer id){
+        log.info("ProductController.deleteById: {}", id);
+        return productHystrixService.deleteById(id) ? "success" : "fail";
     }
 }

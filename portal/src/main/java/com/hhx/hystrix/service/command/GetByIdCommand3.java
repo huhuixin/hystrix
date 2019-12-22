@@ -18,18 +18,22 @@ public class GetByIdCommand3 extends BaseGetByIdCommand {
             .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("command3.pool"))
             .andThreadPoolPropertiesDefaults(
                     HystrixThreadPoolProperties.Setter()
-                            // 核心线程数
+                            // 核心线程数 default_coreSize = 10;
                             .withCoreSize(1)
-                            // 最大线程数
+                            // 最大线程数 default_maximumSize = 10;
                             .withMaximumSize(3)
-                            // 最大空闲时间
+                            // 最大空闲时间 default_keepAliveTimeMinutes = 1;
                             .withKeepAliveTimeMinutes(1)
-                            // 队列长度
+                            // 队列长度 default_maxQueueSize = -1;
                             .withMaxQueueSize(100)
+                            // default_queueSizeRejectionThreshold = 5;
                             .withQueueSizeRejectionThreshold(1)
-                            .withMetricsRollingStatisticalWindowBuckets(1)
-                            .withAllowMaximumSizeToDivergeFromCoreSize(true)
-                            .withMetricsRollingStatisticalWindowInMilliseconds(1));
+                            // default_threadPoolRollingNumberStatisticalWindowBuckets = 10;
+                            .withMetricsRollingStatisticalWindowBuckets(10)
+                            // default_allow_maximum_size_to_diverge_from_core_size = false;
+                            .withAllowMaximumSizeToDivergeFromCoreSize(false)
+                            // default_threadPoolRollingNumberStatisticalWindow = 10000;
+                            .withMetricsRollingStatisticalWindowInMilliseconds(1000));
 
     public GetByIdCommand3(ProductService productService, Integer id) {
         super(SETTER, productService, id);

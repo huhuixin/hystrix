@@ -4,7 +4,7 @@ import com.hhx.hystrix.dto.ProductDto;
 import com.hhx.hystrix.service.ProductService;
 import com.netflix.hystrix.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.RandomUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,18 +15,18 @@ import java.util.List;
 @Slf4j
 public class BaseGetByIdCommand extends HystrixCommand<ProductDto> {
 
-    public static List<Class<? extends BaseGetByIdCommand>> COMMAND_CLASSES =
-            Arrays.asList(GetByIdCommand1.class, GetByIdCommand2.class);
+    private static List<Class<? extends BaseGetByIdCommand>> ALL =
+            Arrays.asList(GetByIdCommand1.class, GetByIdCommand2.class, GetByIdCommand3.class);
 
     public static Class<? extends BaseGetByIdCommand> randomCommandClass(){
-        return COMMAND_CLASSES.get(RandomUtils.nextInt(COMMAND_CLASSES.size()));
+        return ALL.get(RandomUtils.nextInt(0, ALL.size()));
     }
 
     private ProductService productService;
     private Integer id;
 
 
-    public BaseGetByIdCommand(Setter setter, ProductService productService, Integer id) {
+    BaseGetByIdCommand(Setter setter, ProductService productService, Integer id) {
         super(setter);
         this.productService = productService;
         this.id = id;
