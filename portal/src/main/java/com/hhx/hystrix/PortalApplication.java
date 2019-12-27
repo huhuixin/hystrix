@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @EnableHystrixDashboard
 @SpringBootApplication
+@EnableScheduling
 public class PortalApplication {
 
 

@@ -24,3 +24,9 @@ With the UUID you can stop the running instance with the following command:
 ```
 java -jar standalone-hystrix-dashboard-{VERSION}-all.jar stop UUDI
 ```
+
+首页
+http://localhost:7979/hystrix-dashboard/
+
+采集点
+http://localhost:8080/hystrix.stream
